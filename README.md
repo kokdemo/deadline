@@ -1,5 +1,7 @@
-deadline·俟现  http://todo.xiuxiu.de
+deadline·俟现  
 ========
+
+http://todo.xiuxiu.de
 
 这是我以前曾经写过的todo的一个借尸还魂版本……
 

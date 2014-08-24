@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta author="@kokdemo">
+	<title>Deadline·俟现</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+
+</head>
+<body>
+	<section id="todoapp" class="container">
+		<header id="header">
+		<h1>Deadline·俟现</h1>
+		</header>
+		<div id="page">
+            <div class="inputform">
+                    <div class="col-sm-12 inputs">
+                        <div class="col-xs-12 col-md-7 nopading">
+                            <label for="new-todo" class="col-xs-12 col-md-2 control-label nopading">我打算做</label>
+                            <input type="text" class="nopading col-xs-12 col-md-10" id="new-todo" placeholder="" autofocus>
+                        </div>
+                      <div class="col-xs-12 col-md-5 nopading">
+                        <label for="plan-times-hour" class="col-sm-2 control-label nopading">估计要</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="nopading plan-time" id="plan-times-hour" placeholder="">
+                              <p class="plan-time-span">小时</p>
+                              <input type="text" class="nopading plan-time" id="plan-times-minute" placeholder="">
+                              <p class="plan-time-span">分钟</p>
+                          </div>
+                      </div>
+                    </div>
+                  <div class="col-sm-12 btn-submit text-center">
+                      <button id="btn-submit" class="btn btn-info ">走你！</button>
+                  </div>
+
+            </div>
+	        <div id="main">
+                <label>
+                  <input id="toggle-all" type="checkbox">全部完成
+                </label>
+				<ul id="todo-list" class="list-group"></ul>
+	        </div>
+		</div>
+		<footer id="footer">
+		</footer>
+		
+	</section>
+	<footer id="info" class="footer">
+        <div class="container list-inline text-center">
+            <p>修改自<a href="http://todomvc.com">TodoMVC</a>项目</p>
+		    <p><a href="http://wocai.de">kok的blog</a></p>
+        </div>
+
+	</footer>
+
+	<script id="todo-template" type="text/x-handlebars-template">
+	{{#this}}
+	<li class="list-group-item {{#if completed}}completed{{/if}}" data-id="{{id}}">
+		<div class="view row">
+            <div class="col-xs-1 col-md-1">
+                <input class="toggle" style="" type="checkbox" {{#if completed}}checked{{/if}}>
+            </div>
+            <div class="col-xs-1 col-md-1">
+                <button type="button" style="" class="btn btn-warning destroy"></button>
+            </div>
+            <div class="col-xs-10 col-md-10">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                        <p class="title-span">{{title}}</p>
+                        <input class="edit hidden" autofocus="autofocus" value="{{title}}">
+                    </div>
+                    <div class="lastTimeText">
+                        <label style="float:right" class="lastTime">
+                            <span class="btn-danger badge ">0</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</li>
+	{{/this}}
+	</script>
+	<script id="footer-template" type="text/x-handlebars-template">
+	<span id="todo-count"><strong>{{activeTodoCount}}</strong> 个事项需要完成</span>
+	{{#if completedTodos}}<button id="clear-completed">全部清除 ({{completedTodos}})</button>{{/if}}
+	</script>
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/handlebars.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+
+	<script src="js/app.js"></script>
+
+	<script type="text/javascript">
+		var i=Math.floor(Math.random()*6);
+		var funnyword=["你是开源社区的成员吗？","tip：双击可以修改事项","拖延是可耻的！","学而不思则罔，思而不学完蛋……","又忘了做什么吗？面壁思过去！","还有什么没完成？"];
+		$("#new-todo").attr("placeholder",funnyword[i]);
+	</script>
+</body>
+</html>

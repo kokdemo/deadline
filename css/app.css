@@ -1,0 +1,149 @@
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#main,
+#footer {
+	display: none;
+}
+body{
+    font-family: "Microsoft Yahei", "微软雅黑", "宋体", "Arial", sans-serif;
+}
+
+header{
+    margin-bottom: 5%;
+}
+
+#toggle {
+    zoom: 200%;
+}
+
+.nopading{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.nopading label{
+    font-size: 1.5em;
+}
+.nopading input{
+    line-height: 1.8em;
+}
+
+.lastTimeText label{
+    position: absolute;
+    right: 4px;
+}
+.progress-bar,.progress{
+    height: 50px;
+    margin-bottom: 0;
+}
+.progress-bar{
+    text-align: left;
+    line-height: 50px;
+}
+.title-span{
+    font-size: 300%;
+    margin: 0;
+}
+.edit{
+    font-size: 210%;
+    border: 0;
+    padding: 0;
+    display: inline-block;
+    background: #d3d3d3;
+}
+.lastTimeText label{
+    line-height: 50px;
+}
+
+.lastTimeText span{
+    font-size: 120%;
+}
+
+.plan-time{
+    width: 35%;
+}
+
+#new-todo{
+    margin-left: 0;
+}
+
+.plan-time-span{
+    font: 2em;
+    display: inline;
+}
+
+.btn-submit button{
+    margin-top: 15px;
+    max-width: 400px;
+    width: 100%;
+    height: 200%;
+}
+.form-group{
+    float: none;
+}
+
+#todo-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#todo-list li .toggle {
+	text-align: center;
+	margin: auto 0;
+    width: 100%;
+	border: none; /* Mobile Safari */
+	-webkit-appearance: none;
+	/*-moz-appearance: none;*/
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+
+#todo-list li .toggle:after {
+
+	font-size: 30px;
+	content: '✔';
+	line-height: 50px; /* 40 + a couple of pixels visual adjustment */
+	color: #d9d9d9;
+	text-shadow: 0 -1px 0 #bfbfbf;
+}
+
+#todo-list li .toggle:checked:after {
+	color: #85ada7;
+	text-shadow: 0 1px 0 #669991;
+	bottom: 1px;
+	position: relative;
+}
+
+#todo-list li .destroy {
+    height: 50px;
+    width: 100%;
+    padding: 0;
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
+
+}
+
+#todo-list li .destroy:hover {
+
+}
+
+#todo-list li .destroy:after {
+	content: '✖';
+    font-size: 30px;
+}
+
+#todo-list li:hover .destroy {
+	display: block;
+}
+
+#inputfrom{
+    display: block;
+}

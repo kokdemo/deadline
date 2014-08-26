@@ -12,7 +12,7 @@ body{
 }
 
 header{
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 
 #toggle {
@@ -144,6 +144,17 @@ header{
 	display: block;
 }
 
-#inputfrom{
-    display: block;
+input{
+    border-radius: 4px;
+    box-shadow: 0;
+}
+
+.forms{
+    background-color: #dddddd;
+    padding: 0.5em;
+    border-radius: 4px;
+}
+
+.view div{
+    padding: 1px;
 }

@@ -1,176 +1,121 @@
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
-    padding-left: 0;
-    padding-right: 0;
-}
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
 
-.col-md-1{
-    max-width: 3.5em;
-}
-
-.clear{
-    clear: both;
-}
-
-#main,
-#footer {
-	display: none;
-}
-body{
-    font-family: "Microsoft Yahei", "微软雅黑", "宋体", "Arial", sans-serif;
-}
-
-header{
-    margin-bottom: 2%;
-}
-
-#toggle {
-    zoom: 200%;
-}
-
-.nopading{
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.nopading label{
-    font: inherit;
-    text-align: center;
-    line-height: 1.8em;
-    font-size: 1em;
-}
-.nopading input{
-    line-height: 1.8em;
-}
-
-.lastTimeText label{
-    position: absolute;
-    right: 4px;
-}
-.progress-bar,.progress{
-    height: 50px;
-    margin-bottom: 0;
-}
-.progress-bar{
-    text-align: left;
-    line-height: 50px;
-}
-
-.progress-group{
-    width: 100%;
-}
-
-
-.title-span{
-    font-size: 2em;
-    margin: 0;
-}
-.edit{
-    font-size: 210%;
-    border: 0;
-    padding: 0;
-    display: inline-block;
-    background: #d3d3d3;
-}
-.lastTimeText label{
-    line-height: 50px;
-}
-
-.lastTimeText span{
-    font-size: 120%;
-}
-
-.plan-time{
-    width: 35%;
-}
-
-#new-todo{
-    margin-left: 0;
-}
-
-.plan-time-span{
-    font: 2em;
-    display: inline;
-}
-
-.btn-submit button{
-    margin-left: 3px;
-    line-height: 2.25em;
-    width: 100%;
-}
-.form-group{
-    float: none;
-}
-
-#todo-list {
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
 	margin: 0;
 	padding: 0;
-	list-style: none;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
-
-#todo-list li .toggle {
-	text-align: center;
-	margin: auto 0;
-    width: 100%;
-	border: none; /* Mobile Safari */
-	-webkit-appearance: none;
-	/*-moz-appearance: none;*/
-	-ms-appearance: none;
-	-o-appearance: none;
-	appearance: none;
-}
-
-#todo-list li .toggle:after {
-
-	font-size: 30px;
-	content: '✔';
-	line-height: 50px; /* 40 + a couple of pixels visual adjustment */
-	color: #d9d9d9;
-	text-shadow: 0 -1px 0 #bfbfbf;
-}
-
-#todo-list li .toggle:checked:after {
-	color: #85ada7;
-	text-shadow: 0 1px 0 #669991;
-	bottom: 1px;
-	position: relative;
-}
-
-#todo-list li .destroy {
-    height: 50px;
-    width: 100%;
-    padding: 0;
-	-webkit-transition: all 0.2s;
-	-moz-transition: all 0.2s;
-	-ms-transition: all 0.2s;
-	-o-transition: all 0.2s;
-	transition: all 0.2s;
-
-}
-
-#todo-list li .destroy:hover {
-
-}
-
-#todo-list li .destroy:after {
-	content: '✖';
-    font-size: 30px;
-}
-
-#todo-list li:hover .destroy {
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-
-input{
-    border-radius: 4px;
-    box-shadow: 0;
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
-.forms{
-    background-color: #dddddd;
-    padding: 0.5em;
-    border-radius: 4px;
+/*css reset end*/
+
+#main{
+    max-width: 640px;
+    margin: auto;
 }
 
-.view div{
-    padding: 1px;
+.card{
+    border: 1px #cccccc solid;
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px #888888;
+    background: #FFFFFF;
+}
+
+.green{
+    background: #0ABF04;
+    color: #f5f5f5;
+    line-height: 40px;
+    font-size: 110%;
+}
+
+.yellow{
+    background: #FFAE00;
+    color: #f5f5f5;
+    line-height: 40px;
+    font-size: 110%;
+}
+
+.orange{
+    background: orangered;
+    color: #f5f5f5;
+    line-height: 40px;
+    font-size: 110%;
+}
+
+.red{
+    background: #ff0000;
+    color: #f5f5f5;
+    line-height: 40px;
+    font-size: 110%;
+}
+
+#input{
+    padding: 5px;
+    width: 100%;
+    height: 115px;
+    border: 1px #cccccc solid;
+    border-radius: 3px;
+    box-shadow: 3px 3px 5px #888888;
+}
+#input *{
+    display: inline-block;
+}
+
+#input-todo{
+    width: 78%;
+    height: 103px;
+    vertical-align: top;
+    font-size: 60px;
+}
+
+#input-important{
+    width: 18%;
+}
+
+#input-important button{
+    max-width: 50px;
+    max-height: 50px;
+    width: 49%;
+    height: 50px;
+    margin-bottom: 3px;
 }

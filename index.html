@@ -16,12 +16,11 @@
     <div id="input" class="card">
         <input id="input-todo" type="text" v-model="todoTitle">
         <div id="input-important">
-            <button class="card" v-on="click : addTodo('0')">重要</button>
-            <button class="card" v-on="click : addTodo('1')">紧要</button>
-            <button class="card"  v-on="click : addTodo('2')">要命</button>
-            <button class="card" v-on="click : addTodo('3')">立刻</button>
+            <button class="green" v-on="click : addTodo('0')">重要</button>
+            <button class="yellow" v-on="click : addTodo('1')">紧要</button>
+            <button class="orange" v-on="click : addTodo('2')">要命</button>
+            <button class="red" v-on="click : addTodo('3')">立刻</button>
         </div>
-        {{todoTitle}}
     </div>
     <div id="todolist">
         <div v-repeat="todo" class="todolist-div todolist-{{time}}">

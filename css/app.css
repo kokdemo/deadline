@@ -49,7 +49,7 @@ table {
 
 /*css reset end*/
 body{
-    background: url("bg.jpg");
+    background-color: #f1f4f9;
     background-size: cover;
 }
 
@@ -58,104 +58,139 @@ body{
     margin: auto;
 }
 
-
-.green:before{
-    content: "";
-    float: left;
-    display:inline-block;
-    width: 10px;
-    height: 100%;
-    background: #0ABF04;
-}
-.yellow:before{
-    content: "";
-    float: left;
-    display:inline-block;
-    width: 10px;
-    height: 100%;
-    background: #ffff00;
-}
-.orange:before{
-    content: "";
-    float: left;
-    display:inline-block;
-    width: 10px;
-    height: 100%;
-    background: orange;
-}
-.red:before{
-    content: "";
-    float: left;
-    display:inline-block;
-    width: 10px;
-    height: 100%;
-    background: #ff0000;
+header{
+    display: block;
+    background-color: #3498DB;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    padding-left: 5px;
+    color: #FFF;
 }
 
+header h2{
+    display: inline-block;
+}
 
-/*.green{*/
+/*.green:before{*/
+    /*content: "";*/
+    /*float: left;*/
+    /*display:inline-block;*/
+    /*width: 10px;*/
+    /*height: 100%;*/
     /*background: #0ABF04;*/
-    /*color: #f5f5f5;*/
-    /*line-height: 40px;*/
-    /*font-size: 110%;*/
 /*}*/
-
-/*.yellow{*/
-    /*background: #FFAE00;*/
-    /*color: #f5f5f5;*/
-    /*line-height: 40px;*/
-    /*font-size: 110%;*/
+/*.yellow:before{*/
+    /*content: "";*/
+    /*float: left;*/
+    /*display:inline-block;*/
+    /*width: 10px;*/
+    /*height: 100%;*/
+    /*background: #ffff00;*/
 /*}*/
-
-/*.orange{*/
-    /*background: orangered;*/
-    /*color: #f5f5f5;*/
-    /*line-height: 40px;*/
-    /*font-size: 110%;*/
+/*.orange:before{*/
+    /*content: "";*/
+    /*float: left;*/
+    /*display:inline-block;*/
+    /*width: 10px;*/
+    /*height: 100%;*/
+    /*background: orange;*/
 /*}*/
-
-/*.red{*/
+/*.red:before{*/
+    /*content: "";*/
+    /*float: left;*/
+    /*display:inline-block;*/
+    /*width: 10px;*/
+    /*height: 100%;*/
     /*background: #ff0000;*/
-    /*color: #f5f5f5;*/
-    /*line-height: 40px;*/
-    /*font-size: 110%;*/
 /*}*/
+
+
+.green{
+    background: #27AE60;
+    color: #FFF;
+    line-height: 40px;
+    font-size: 110%;
+}
+
+.yellow{
+    background: #F1C40F;
+    color: #FFF;
+    line-height: 40px;
+    font-size: 110%;
+}
+
+.orange{
+    background: #E67E22;
+    color: #FFF;
+    line-height: 40px;
+    font-size: 110%;
+}
+
+.red{
+    background: #E74C3C;
+    color: #FFF;
+    line-height: 40px;
+    font-size: 110%;
+}
 
 #input{
-    padding: 5px;
+    padding: 0px;
     width: 100%;
-    height: 95px;
-    border: 1px #eeeeee solid;
+    height: 60px;
     border-radius: 3px;
-    background: #888888;
+    background: #FFF;
 }
 #input *{
     display: inline-block;
 }
 
 #input-todo{
-    width: 78%;
-    height: 83px;
+    border: 5px #BDC3C7 solid;
+    color: #34495e;
+    font-family: "Lato", sans-serif;
+    width: 100%;
+    height: 60px;
     vertical-align: top;
-    font-size: 30px;
+    font-size: 20px;
+    box-sizing: border-box;
+    padding-right: 100px;
+    outline:none;
 }
 
 #input-important{
-    width: 18%;
+    display: inline-block;
+    /*width: 100px;*/
+    float: right;
+
 }
 
 #input-important button{
+    float: left;
+    margin: 0;
     padding: 0;
     max-width: 50px;
     max-height: 50px;
     width: 60px;
     height: 40px;
-    margin-bottom: 3px;
-    background: #ffffff;
-    border: 1px #eeeeee solid;
-    border-radius: 3px;
+    border: 0px #eeeeee solid;
+    border-radius: 0px;
     line-height: 40px;
     vertical-align: top;
+}
+
+@media (max-width: 360px) {
+    #input-important button{
+        float: left;
+        margin: 0;
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        border: 0px #eeeeee solid;
+        border-radius: 0px;
+        line-height: 40px;
+        vertical-align: top;
+    }
 }
 
 
@@ -163,41 +198,99 @@ body{
     width: 100%;
     padding: 0;
     margin: 7px 0;
-    height: 80px;
-    border: 1px #eeeeee solid;
+    height: 50px;
+    border: 0px #eeeeee solid;
     border-radius: 3px;
-    background: #FFF;
+    background: #2C3E50;
+    color: #FFF;
+    line-height: 50px;
+
 }
 
+.todolist-div span{
+    padding: 0 0 0 10px;
+    font-size: 20px;
+}
+
+.todolist-div button{
+    border: 0;
+    color: #FFF;
+    background-color: #7F8C8D;
+    width: 50px;
+    height: 100%;
+    float: right;
+}
+
+
 .todolist-0:before{
-    content: "";
+    text-align: center;
+    line-height: 50px ;
+    color: #FFF;
+    content: "重要";
     float: left;
     display:inline-block;
-    width: 10px;
+    width: 50px;
     height: 100%;
-    background: #0ABF04;
+    background: #27AE60;
 }
 .todolist-1:before{
-    content: "";
+    text-align: center;
+    line-height: 50px ;
+    color: #FFF;
+    content: "紧急";
     float: left;
     display:inline-block;
-    width: 10px;
+    width: 50px;
     height: 100%;
-    background: #ffff00;
+    background: #F1C40F;
 }
 .todolist-2:before{
-    content: "";
+    text-align: center;
+    line-height: 50px ;
+    color: #FFF;
+    content: "要命";
     float: left;
     display:inline-block;
-    width: 10px;
+    width: 50px;
     height: 100%;
-    background: orange;
+    background: #E67E22;
 }
 .todolist-3:before{
-    content: "";
+    text-align: center;
+    line-height: 50px ;
+    color: #FFF;
+    content: "立刻";
     float: left;
     display:inline-block;
-    width: 10px;
+    width: 50px;
     height: 100%;
-    background: #ff0000;
+    background: #E74C3C;
 }
+
+/*.todolist-0{*/
+    /*background: #27AE60;*/
+    /*color: #FFF;*/
+    /*line-height: 40px;*/
+    /*font-size: 110%;*/
+/*}*/
+
+/*.todolist-1{*/
+    /*background: #F1C40F;*/
+    /*color: #FFF;*/
+    /*line-height: 40px;*/
+    /*font-size: 110%;*/
+/*}*/
+
+/*.todolist-2{*/
+    /*background: #E67E22;*/
+    /*color: #FFF;*/
+    /*line-height: 40px;*/
+    /*font-size: 110%;*/
+/*}*/
+
+/*.todolist-3{*/
+    /*background: #E74C3C;*/
+    /*color: #FFF;*/
+    /*line-height: 40px;*/
+    /*font-size: 110%;*/
+/*}*/

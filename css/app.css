@@ -51,12 +51,28 @@ table {
 body{
     background-color: #f1f4f9;
     background-size: cover;
+    font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+}
+
+.todolist-div {
+    transition: all .3s ease;
+    height: 30px;
+    padding: 10px;
+    background-color: #eee;
+    overflow: hidden;
+}
+.todolist-div.v-enter, .todolist-div.v-leave {
+    height: 0;
+    padding: 0 10px;
+    opacity: 0;
 }
 
 #main{
     max-width: 640px;
     margin: auto;
 }
+
+
 
 header{
     display: block;
@@ -154,7 +170,6 @@ header h2{
     vertical-align: top;
     font-size: 20px;
     box-sizing: border-box;
-    padding-right: 100px;
     outline:none;
 }
 
@@ -207,20 +222,30 @@ header h2{
 
 }
 
-.todolist-div span{
+.todolist-div .todolist-title{
+    display: inline-block;
     padding: 0 0 0 10px;
     font-size: 20px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width: 200px;
+    height: 50px;
 }
 
 .todolist-div button{
+    display: inline-block;
     border: 0;
     color: #FFF;
     background-color: #7F8C8D;
     width: 50px;
+    max-width: 50px;
     height: 100%;
     float: right;
 }
 
+.todolist-rank,.todolist-time{
+    display: none;
+}
 
 .todolist-0:before{
     text-align: center;
@@ -230,6 +255,7 @@ header h2{
     float: left;
     display:inline-block;
     width: 50px;
+    max-width: 50px;
     height: 100%;
     background: #27AE60;
 }

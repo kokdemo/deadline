@@ -16,7 +16,7 @@ var vm = new Vue({
             var timestamp = date.getTime();
             var title = vm.$data.todoTitle;
             if(title != ""){
-                var tempData = {title: title,time: value,lock:false,timestamp:timestamp,show:true};
+                var tempData = {title: title,time:value,lock:false,timestamp:timestamp,show:true};
                 var temp = vm.$data.todo;
                 if(value == "0"){
                     temp['todo0'].push(tempData);
@@ -96,10 +96,10 @@ var todo = {
             }
         }else{
             vm.$data.todo = {
-                todo0: [{title: "完成后点击「完事」", time: "0"}],
-                todo1: [{title: "任务会自动排序", time: "1"}],
-                todo2: [{title: "点击按钮设置紧要度", time: "2"}],
-                todo3: [{title: "在输入框中添加任务", time: "3"}]
+                todo0: [{title: "完成后点击「完事」", time: "0",show:true}],
+                todo1: [{title: "任务会自动排序", time: "1",show:true}],
+                todo2: [{title: "点击按钮设置紧要度", time: "2",show:true}],
+                todo3: [{title: "在输入框中添加任务", time: "3",show:true}]
             }
         }
     },

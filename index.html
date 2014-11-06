@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="stylesheet" type="text/css" href="css/flaticon.css">
 
 </head>
 <body>
@@ -23,27 +24,28 @@
         <input id="input-todo" type="text" v-model="todoTitle">
     </div>
     <div id="todolist">
-        <div v-repeat="todo.todo3" class="todolist-div todolist-{{time}}" v-transition>
+        <div v-repeat="todo.todo3" v-show="show" class="todolist-div todolist-{{time}}">
             <span class="todolist-rank"></span>
-            <div class="todolist-title"><span >{{title}}</span></div>
+            <div class="todolist-title" v-if="!lock" id="{{title}}" v-on="click : toggleTask('{{title}}','{{time}}')"><span >{{title}}</span></div>
+            <div class="todolist-title flaticon-tack" v-if="lock" id="{{title}}" v-on="click : toggleTask('{{title}}','{{time}}')"><span >{{title}}</span><i class="flaticon-airplane49"></i></div>
             <span class="todolist-time"></span>
             <button v-on="click: finishTodo('{{title}}','{{time}}')">完事</button>
         </div>
-        <div v-repeat="todo.todo2" class="todolist-div todolist-{{time}}" v-transition>
+        <div v-repeat="todo.todo2" class="todolist-div todolist-{{time}}">
             <span class="todolist-rank"></span>
-            <div class="todolist-title"><span >{{title}}</span></div>
+            <div class="todolist-title" id="{{title}}" v-on="click : toggleTask()"><span >{{title}}</span></div>
             <span class="todolist-time"></span>
             <button v-on="click: finishTodo('{{title}}','{{time}}')">完事</button>
         </div>
-        <div v-repeat="todo.todo1" class="todolist-div todolist-{{time}}" v-transition>
+        <div v-repeat="todo.todo1" class="todolist-div todolist-{{time}}">
             <span class="todolist-rank"></span>
-            <div class="todolist-title"><span >{{title}}</span></div>
+            <div class="todolist-title" id="{{title}}" v-on="click : toggleTask()"><span >{{title}}</span></div>
             <span class="todolist-time"></span>
             <button v-on="click: finishTodo('{{title}}','{{time}}')">完事</button>
         </div>
-        <div v-repeat="todo.todo0" class="todolist-div todolist-{{time}}" v-transition>
+        <div v-repeat="todo.todo0" class="todolist-div todolist-{{time}}">
             <span class="todolist-rank"></span>
-            <div class="todolist-title"><span >{{title}}</span></div>
+            <div class="todolist-title" id="{{title}}" v-on="click : toggleTask()"><span >{{title}}</span></div>
             <span class="todolist-time"></span>
             <button v-on="click: finishTodo('{{title}}','{{time}}')">完事</button>
         </div>

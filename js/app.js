@@ -12,9 +12,11 @@ var vm = new Vue({
     },
     methods: {
         addTodo: function (value) {
+            var date = new Date();
+            var timestamp = date.getTime();
             var title = vm.$data.todoTitle;
             if(title != ""){
-                var tempData = {title: title, time: value};
+                var tempData = {title: title,time: value,lock:false,timestamp:timestamp,show:true};
                 var temp = vm.$data.todo;
                 if(value == "0"){
                     temp['todo0'].push(tempData);
@@ -36,11 +38,24 @@ var vm = new Vue({
             var temp = vm.$data.todo["todo"+time];
             for (var i = 0; i < temp.length; i++) {
                 if (title === temp[i].title) {
-                    temp.splice(i, 1);
+                    if(temp[i].lock == true){
+                        //如果任务被锁定，点击完成，任务只会被隐藏而不会消失
+                        temp[i].show = false;
+                    }else{
+                        temp.splice(i, 1);
+                    }
                     break;
                 }
             }
-
+        },
+        toggleTask: function(title,time){
+            var temp = vm.$data.todo["todo"+time];
+            for (var i = 0; i < temp.length; i++) {
+                if (title === temp[i].title) {
+                    temp[i].lock = !temp[i].lock;
+                    break;
+                }
+            }
         }
     }
 });
@@ -60,9 +75,25 @@ var todo = {
     resumeState: function () {
         var state = localStorage.getItem('todofiles');
         if (state) {
+            var date =new Date();
+            var timestamp = date.getTime();
+            var hour = date.getHours();
             state = JSON.parse(state);
-            console.log('resume state', JSON.stringify(state));
+            //console.log('resume state', JSON.stringify(state));
             vm.$data.todo = state;
+            //搜索一遍所有的任务，按照条件还原那些锁定任务。
+            var temp = vm.$data.todo;
+            var todolist = ["todo0","todo1","todo2","todo3"];
+            for(var i=0;i< todolist.length;i++){
+                var tempArray = temp[todolist[i]];
+                for(var j=0;j<tempArray.length;j++){
+                    var tempObj = tempArray[j];
+                    //判断，当任务被隐藏，且时间戳小于当前时间4小时以上，且访问事件晚于早晨8点
+                    if(tempObj.show == false && timestamp - tempObj.timestamp >14400  && hour >= 8){
+                        tempObj.show = true;
+                    }
+                }
+            }
         }else{
             vm.$data.todo = {
                 todo0: [{title: "完成后点击「完事」", time: "0"}],
@@ -79,6 +110,9 @@ var todo = {
     },
     changeWidth: function(){
         var width = document.body.scrollWidth;
+        if(width>600){
+            width = 600 ;
+        }
         $(".todolist-title").width(width-100);
     },
     init:function(){

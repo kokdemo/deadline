@@ -52,12 +52,11 @@ body{
     background-color: #f1f4f9;
     background-size: cover;
     font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 .todolist-div {
     transition: all .3s ease;
-    height: 30px;
-    padding: 10px;
     background-color: #eee;
     overflow: hidden;
 }
@@ -77,10 +76,10 @@ body{
 header{
     display: block;
     background-color: #3498DB;
-    height: 40px;
+    height: 50px;
     font-size: 20px;
-    line-height: 40px;
-    padding-left: 5px;
+    line-height: 50px;
+    padding-left: 10px;
     color: #FFF;
 }
 
@@ -125,28 +124,28 @@ header h2{
 .green{
     background: #27AE60;
     color: #FFF;
-    line-height: 40px;
+    line-height: 50px;
     font-size: 110%;
 }
 
 .yellow{
     background: #F1C40F;
     color: #FFF;
-    line-height: 40px;
+    line-height: 50px;
     font-size: 110%;
 }
 
 .orange{
     background: #E67E22;
     color: #FFF;
-    line-height: 40px;
+    line-height: 50px;
     font-size: 110%;
 }
 
 .red{
     background: #E74C3C;
     color: #FFF;
-    line-height: 40px;
+    line-height: 50px;
     font-size: 110%;
 }
 
@@ -154,7 +153,7 @@ header h2{
     padding: 0px;
     width: 100%;
     height: 60px;
-    border-radius: 3px;
+    border-radius: 0px;
     background: #FFF;
 }
 #input *{
@@ -162,7 +161,8 @@ header h2{
 }
 
 #input-todo{
-    border: 5px #BDC3C7 solid;
+    display: flex;
+    /*border: 5px #BDC3C7 solid;*/
     color: #34495e;
     font-family: "Lato", sans-serif;
     width: 100%;
@@ -171,6 +171,10 @@ header h2{
     font-size: 20px;
     box-sizing: border-box;
     outline:none;
+    box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.26);
+    border-width: 0 0 1px 0;
+    border-color: rgba(255, 255, 255, 0.12);
+    background: none;
 }
 
 #input-important{
@@ -180,6 +184,7 @@ header h2{
 
 }
 
+
 #input-important button{
     float: left;
     margin: 0;
@@ -187,7 +192,7 @@ header h2{
     max-width: 50px;
     max-height: 50px;
     width: 60px;
-    height: 40px;
+    height: 50px;
     border: 0px #eeeeee solid;
     border-radius: 0px;
     line-height: 40px;
@@ -200,7 +205,7 @@ header h2{
         margin: 0;
         padding: 0;
         width: 40px;
-        height: 40px;
+        height: 50px;
         border: 0px #eeeeee solid;
         border-radius: 0px;
         line-height: 40px;
@@ -214,11 +219,14 @@ header h2{
     padding: 0;
     margin: 7px 0;
     height: 50px;
-    border: 0px #eeeeee solid;
-    border-radius: 3px;
+    /*border: 0px #eeeeee solid;*/
+    border-radius: 0px;
     background: #2C3E50;
     color: #FFF;
     line-height: 50px;
+    box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.26);
+    border-width: 0 0 1px 0;
+    border-color: rgba(255, 255, 255, 0.12);
 
 }
 

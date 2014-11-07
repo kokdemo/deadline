@@ -56,6 +56,10 @@ var vm = new Vue({
                     break;
                 }
             }
+            setTimeout(function(){
+                todo.changeWidth();
+            },50);
+
         }
     }
 });
@@ -113,10 +117,14 @@ var todo = {
         if(width>600){
             width = 600 ;
         }
-        $(".todolist-title").width(width-100);
+        $(".todolist-title").width(width*0.95-110);
     },
     init:function(){
+        todo.changeWidth();
         todo.resumeState();
+        setTimeout(function(){todo.changeWidth()},100);
+        setTimeout(function(){todo.changeWidth()},100);
+        setTimeout(function(){todo.changeWidth()},100);
     }
 };
 

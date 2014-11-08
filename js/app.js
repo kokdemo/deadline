@@ -2,48 +2,78 @@ var vm = new Vue({
     el: '#main',
     data: {
         todoTitle: "",
+        childTodo: [],
         todo:{
             todo0: [],
             todo1: [],
             todo2: [],
             todo3: []
         },
+        todoList:[{name:"todo3"},{name:"todo2"},{name:"todo1"},{name:"todo0"}],
         todoTag:[0,0,0,0]
     },
     methods: {
         addTodo: function (value) {
-            var date = new Date();
-            var timestamp = date.getTime();
             var title = vm.$data.todoTitle;
-            if(title != ""){
-                var tempData = {title: title,time:value,lock:false,timestamp:timestamp,show:true};
+            if(title != "" || vm.$data.childTodo != []){
+                var date = new Date();
+                var tempData = {
+                    title: title,
+                    time:value,
+                    lock:false,
+                    timestamp:date.getTime(),
+                    show:true,
+                    childTodo: vm.$data.childTodo
+                };
                 var temp = vm.$data.todo;
-                if(value == "0"){
-                    temp['todo0'].push(tempData);
-                }else if(value == "1"){
-                    temp['todo1'].push(tempData);
-                }else if(value == "2"){
-                    temp['todo2'].push(tempData);
-                }else if(value == "3"){
-                    temp['todo3'].push(tempData);
-                }
+                temp['todo'+value].push(tempData);
                 vm.$data.todoTitle = "";
                 todo.changeWord();
                 todo.changeWidth();
+                console.info(vm.$data.childTodo);
             }else{
                 alert("少侠你还没有输入任务内容呢。")
             }
         },
+
         finishTodo: function (title,time) {
             var temp = vm.$data.todo["todo"+time];
             for (var i = 0; i < temp.length; i++) {
                 if (title === temp[i].title) {
                     if(temp[i].lock == true){
-                        //如果任务被锁定，点击完成，任务只会被隐藏而不会消失
+                        //如果任务被锁定，点击完成，任务只会被隐藏而不会消失,同时时间戳更新。
+                        var date = new Date();
+                        temp[i].timestamp = date.getTime();
                         temp[i].show = false;
+
                     }else{
                         temp.splice(i, 1);
                     }
+                    break;
+                }
+            }
+        },
+        addChildTodo: function(){
+            //alert("1");
+            var title = vm.$data.todoTitle;
+            if(title != ""){
+                vm.$data.childTodo.push({title:title});
+                vm.$data.todoTitle = "";
+            }else{
+                alert("少侠你还没有输入任务内容呢。")
+            }
+
+        },
+        removeChildTodo: function(title){
+            var temp = vm.$data.childTodo;
+            if (title === temp[0].title){
+                //如果移除主标题，那么就删除整个子任务
+                vm.$data.childTodo = [];
+            }
+            for (var i = 1; i < temp.length; i++) {
+                //如果不是点击标题，那么按条删除
+                if (title === temp[i].title) {
+                    temp.splice(i, 1);
                     break;
                 }
             }
@@ -65,6 +95,7 @@ var vm = new Vue({
 });
 
 var todo = {
+
     saveState: function () {
         var state = vm.$data.todo;
         try {

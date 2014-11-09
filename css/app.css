@@ -84,39 +84,15 @@ header h2{
     display: inline-block;
 }
 
-/*.green:before{*/
-    /*content: "";*/
-    /*float: left;*/
-    /*display:inline-block;*/
-    /*width: 10px;*/
-    /*height: 100%;*/
-    /*background: #0ABF04;*/
-/*}*/
-/*.yellow:before{*/
-    /*content: "";*/
-    /*float: left;*/
-    /*display:inline-block;*/
-    /*width: 10px;*/
-    /*height: 100%;*/
-    /*background: #ffff00;*/
-/*}*/
-/*.orange:before{*/
-    /*content: "";*/
-    /*float: left;*/
-    /*display:inline-block;*/
-    /*width: 10px;*/
-    /*height: 100%;*/
-    /*background: orange;*/
-/*}*/
-/*.red:before{*/
-    /*content: "";*/
-    /*float: left;*/
-    /*display:inline-block;*/
-    /*width: 10px;*/
-    /*height: 100%;*/
-    /*background: #ff0000;*/
-/*}*/
-
+.reset-button button{
+    height: 50px;
+    width: 100%;
+    font-size: 1.2em;
+    background-color: #BDC3C7;
+    box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.26);
+    border-width: 0 0 1px 0;
+    border-color: rgba(255, 255, 255, 0.12);
+}
 
 .green{
     background: #27AE60;
@@ -156,7 +132,7 @@ header h2{
     border-width: 0 0 1px 0;
     border-color: rgba(255, 255, 255, 0.12);
 }
-
+/*输入框和动画*/
 #input-todo{
     width: 100%;
     padding-left: 10px;
@@ -176,7 +152,7 @@ header h2{
     color: #FFF;
     background-color: #34495E;
 }
-
+/*子任务设计*/
 .childTodo{
     width: 100%;
     line-height: 40px;
@@ -199,7 +175,7 @@ header h2{
     font-size: 1.2em;
     font-weight: 700;
 }
-
+/*任务紧要度按钮*/
 #input-important{
     display: inline-block;
     /*width: 100px;*/
@@ -235,13 +211,11 @@ header h2{
     }
 }
 
-
+/*任务细节和动画*/
 .todolist-div{
     width: 100%;
     padding: 0;
     margin: 7px 0;
-    height: 50px;
-    /*border: 0px #eeeeee solid;*/
     border-radius: 0px;
     background: #2C3E50;
     color: #FFF;
@@ -250,7 +224,7 @@ header h2{
     border-width: 0 0 1px 0;
     border-color: rgba(255, 255, 255, 0.12);
     transition: all .3s ease;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .todolist-div.v-enter, .todolist-div.v-leave {
@@ -258,32 +232,69 @@ header h2{
     padding: 0 10px;
     opacity: 0;
 }
-
+/*任务*/
 .todolist-div .todolist-title{
     display: inline-block;
     padding: 0 0 0 10px;
     font-size: 20px;
     overflow-x: hidden;
     overflow-y: hidden;
-
     height: 50px;
 }
-
+/*任务完成按钮*/
 .todolist-div button{
     display: inline-block;
     border: 0;
-    color: #FFF;
-    background-color: #7F8C8D;
     width: 50px;
     max-width: 50px;
-    height: 100%;
+    max-height: 50px;
+    /*height: 100%;*/
     float: right;
 }
 
 .todolist-rank,.todolist-time{
     display: none;
 }
+/*子任务*/
+.todolist-childTitle{
+    padding-left: 60px;
+    font-weight: 700;
+    font-size: 20px;
+}
 
+.todolist-childTitle button{
+    display: inline-block;
+    border: 0;
+    width: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    font-size: 16px;
+    /*height: 100%;*/
+    float: right;
+}
+
+.todolist-childtask{
+    color: #34495E;
+
+    background-color: #FFF;
+}
+
+.todolist-childtask span{
+    padding-left: 10px;
+}
+
+.todolist-div .todolist-childFinish{
+    display: inline-block;
+    border: 0;
+    color: #000;
+    background-color: #ECF0F1;
+    width: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    /*height: 100%;*/
+    float: right;
+}
+/*任务标签*/
 .todolist-0:before{
     text-align: center;
     line-height: 50px ;
@@ -293,7 +304,7 @@ header h2{
     display:inline-block;
     width: 50px;
     max-width: 50px;
-    height: 100%;
+    /*height: 100%;*/
     background: #27AE60;
 }
 .todolist-1:before{
@@ -304,7 +315,7 @@ header h2{
     float: left;
     display:inline-block;
     width: 50px;
-    height: 100%;
+    /*height: 100%;*/
     background: #F1C40F;
 }
 .todolist-2:before{
@@ -315,7 +326,7 @@ header h2{
     float: left;
     display:inline-block;
     width: 50px;
-    height: 100%;
+    /*height: 100%;*/
     background: #E67E22;
 }
 .todolist-3:before{
@@ -326,34 +337,36 @@ header h2{
     float: left;
     display:inline-block;
     width: 50px;
-    height: 100%;
+    /*height: 100%;*/
     background: #E74C3C;
 }
 
-/*.todolist-0{*/
-    /*background: #27AE60;*/
-    /*color: #FFF;*/
+.list-0{
+    background: #27AE60;
+    color: #FFF;
     /*line-height: 40px;*/
-    /*font-size: 110%;*/
-/*}*/
+}
 
-/*.todolist-1{*/
-    /*background: #F1C40F;*/
-    /*color: #FFF;*/
+.list-1{
+    background: #F1C40F;
+    color: #FFF;
     /*line-height: 40px;*/
-    /*font-size: 110%;*/
-/*}*/
+}
 
-/*.todolist-2{*/
-    /*background: #E67E22;*/
-    /*color: #FFF;*/
+.list-2{
+    background: #E67E22;
+    color: #FFF;
     /*line-height: 40px;*/
-    /*font-size: 110%;*/
-/*}*/
+}
 
-/*.todolist-3{*/
-    /*background: #E74C3C;*/
-    /*color: #FFF;*/
+.list-3{
+    background: #E74C3C;
+    color: #FFF;
     /*line-height: 40px;*/
-    /*font-size: 110%;*/
-/*}*/
+}
+.list-4{
+    background: #7F8C8D;
+    color: #FFF;
+    /*line-height: 40px;*/
+
+}

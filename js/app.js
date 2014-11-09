@@ -13,6 +13,7 @@ var vm = new Vue({
         todoTag:[0,0,0,0]
     },
     methods: {
+        //增加todo 区分单一任务和子任务
         addTodo: function (value) {
             var title = vm.$data.todoTitle;
             if(title != "" || vm.$data.childTodo != []){
@@ -30,29 +31,41 @@ var vm = new Vue({
                 vm.$data.todoTitle = "";
                 todo.changeWord();
                 todo.changeWidth();
-                console.info(vm.$data.childTodo);
+                //console.info(vm.$data.childTodo);
             }else{
                 alert("少侠你还没有输入任务内容呢。")
             }
         },
-
-        finishTodo: function (title,time) {
+        //完成一整个任务
+        finishTodo: function (title,time,child) {
             var temp = vm.$data.todo["todo"+time];
             for (var i = 0; i < temp.length; i++) {
                 if (title === temp[i].title) {
-                    if(temp[i].lock == true){
-                        //如果任务被锁定，点击完成，任务只会被隐藏而不会消失,同时时间戳更新。
-                        var date = new Date();
-                        temp[i].timestamp = date.getTime();
-                        temp[i].show = false;
-
+                    if(child != null){
+                        //如果任务的传入子任务不为空，说明不是一个单一任务。
+                        var childArray = temp[i].childTodo;
+                        for(var j=0;j<childArray.length;j++){
+                            if(child == childArray[j].title){
+                                childArray.splice(j, 1);
+                            }
+                        }
                     }else{
-                        temp.splice(i, 1);
+                        //如果任务的传入子任务其他情况，说明是一个单一任务或者全任务被完成。
+                        if(temp[i].lock == true){
+                            //如果任务被锁定，点击完成，任务只会被隐藏而不会消失,同时时间戳更新。
+                            var date = new Date();
+                            temp[i].timestamp = date.getTime();
+                            temp[i].show = false;
+                        }else{
+                            temp.splice(i, 1);
+                        }
+                        break;
                     }
-                    break;
+
                 }
             }
         },
+        //增加添加中的子任务
         addChildTodo: function(){
             //alert("1");
             var title = vm.$data.todoTitle;
@@ -64,6 +77,7 @@ var vm = new Vue({
             }
 
         },
+        //移除添加中的子任务
         removeChildTodo: function(title){
             var temp = vm.$data.childTodo;
             if (title === temp[0].title){
@@ -78,6 +92,7 @@ var vm = new Vue({
                 }
             }
         },
+        //切换任务状态
         toggleTask: function(title,time){
             var temp = vm.$data.todo["todo"+time];
             for (var i = 0; i < temp.length; i++) {
@@ -89,7 +104,16 @@ var vm = new Vue({
             setTimeout(function(){
                 todo.changeWidth();
             },50);
-
+        },
+        deleteAll: function(){
+            if(confirm("确定要移除所有的任务吗？"))
+            {
+                todo.resetData();
+            }
+            else
+            {
+                alert("你大概是手滑了……");
+            }
         }
     }
 });
@@ -130,12 +154,38 @@ var todo = {
                 }
             }
         }else{
-            vm.$data.todo = {
-                todo0: [{title: "完成后点击「完事」", time: "0",show:true}],
-                todo1: [{title: "任务会自动排序", time: "1",show:true}],
-                todo2: [{title: "点击按钮设置紧要度", time: "2",show:true}],
-                todo3: [{title: "在输入框中添加任务", time: "3",show:true}]
-            }
+            this.resetData();
+        }
+    },
+    resetData: function(){
+        vm.$data.todo = {
+            todo3: [
+                {title: "在输入框中添加任务", time: "3",show:true, lock:false,childTodo:[]},
+                {title: "点击按钮设置紧要度", time: "3",show:true, lock:false,childTodo:[]},
+                {title: "完成后点击「完事」", time: "3",show:true, lock:false,childTodo:[]},
+                {title: "任务会自动排序", time: "3",show:true,childTodo:[]}
+            ],
+            todo2: [
+                {title: "接着尝试「锁定」", time: "2",show:true,lock:false,childTodo:[]},
+                {title: "点击任务标题锁定", time: "2",show:true,lock:false,childTodo:[]},
+                {title: "再次点击会解锁", time: "2",show:true,lock:false ,childTodo:[] },
+                {title: "锁定任务每天刷新", time: "2",show:true,lock:false,childTodo:[]}
+            ],
+            todo1: [
+                {title: "", time: "1",show:true,lock:false,
+                    childTodo:[
+                        {title: "开始体验子任务"},
+                        {title: "在输入框中输入"},
+                        {title: "输入回车增加子任务"},
+                        {title: "其余同part1"}
+                    ]
+                }
+            ],
+            todo0: [
+                {title: "最后提示", time: "0",show:true,lock:false,childTodo:[]},
+                {title: "「删除所有」危险", time: "0",show:true,lock:false,childTodo:[]},
+                {title: "开始你的「俟现」吧！", time: "0",show:true,lock:false,childTodo:[]}
+            ]
         }
     },
     changeWord: function (){

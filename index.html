@@ -35,35 +35,60 @@
         <div v-repeat="list:todoList">
             <div v-repeat="task:todo[list.name]" v-show="task.show" class="todolist-div todolist-{{task.time}}" v-transition>
                 <div v-if="task.childTodo.length == 0">
-                    <div class="todolist-title" v-if="!lock" id="{{task.title}}" v-on="click : toggleTask('{{task.title}}','{{task.time}}')">
+                    <div class="todolist-title" v-if="!task.lock" id="{{task.title}}" v-on="click : toggleTask('{{task.title}}','{{task.time}}')">
                         <span >{{task.title}}</span>
                     </div>
-                    <div class="todolist-title flaticon-tack" v-if="lock" id="{{task.title}}" v-on="click : toggleTask('{{task.title}}','{{task.time}}')">
+                    <div class="todolist-title flaticon-tack" v-if="task.lock" id="{{task.title}}" v-on="click : toggleTask('{{task.title}}','{{task.time}}')">
                         <span >{{task.title}}</span>
                     </div>
                     <button v-on="click: finishTodo('{{task.title}}','{{task.time}}')" class="list-4">完事</button>
                 </div>
                 <div v-if="task.childTodo.length > 0">
                     <ul>
-                        <li v-repeat="task.childTodo">
+                        <li v-repeat="childTask:task.childTodo">
                             <div v-if="{{$index}} == 0" class="todolist-childTitle list-{{task.time}}">
-                                {{title}}
+                                {{childTask.title}}
                                 <button v-on="click: finishTodo('{{task.title}}','{{task.time}}')" class="list-{{task.time}}">完事</button>
                             </div>
-                            <div v-if="{{$index}} != 0" class="todolist-childtask">
+                            <div v-if="{{$index}} != 0 && childTask.show" class="todolist-childtask">
                                 <div class="hr"></div>
-                                <span>{{$index}}. {{title}}</span>
-                                <button v-on="click: finishTodo('{{task.title}}','{{task.time}}','{{title}}')" class="todolist-childFinish">完事</button>
+                                <span>{{$index}}. {{childTask.title}}</span>
+                                <button v-on="click: finishTodo('{{task.title}}','{{task.time}}','{{childTask.title}}')" class="todolist-childFinish">完事</button>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-
         </div>
-        <div class="reset-button">
-                <button v-on="click: deleteAll()">删除所有</button>
+    </div>
+    <div id="history">
+        {{todo.history}}
+        <div v-repeat="task:todo.history" class="todolist-div todolist-{{task.time}} todolist-history" v-transition>
+            <div v-if="task.childTodo.length == 0" >
+                    <div class="todolist-title" v-if="!task.lock" id="{{task.title}}" v-on="click : toggleTask('{{task.title}}','{{task.time}}')" >
+                        <span >{{task.title}}</span>
+                    </div>
+                <span>{{task.timestamp}}</span>
             </div>
+                <div v-if="task.childTodo.length > 0">
+                    <ul>
+                        <li v-repeat="childTask:task.childTodo">
+                            <div v-if="{{$index}} == 0" class="todolist-childTitle list-{{task.time}}">
+                                {{childTask.title}}
+                            </div>
+                            <div v-if="{{$index}} != 0 " class="todolist-childtask">
+                                <div class="hr"></div>
+                                <span>{{$index}}. {{childTask.title}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+    </div>
+    <div id="control">
+        <button>历史</button>
+        <button>统计</button>
+        <button v-on="click: deleteAll()">删除</button>
     </div>
 
 </div>

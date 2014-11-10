@@ -7,7 +7,8 @@ var vm = new Vue({
             todo0: [],
             todo1: [],
             todo2: [],
-            todo3: []
+            todo3: [],
+            history: []
         },
         todoList:[{name:"todo3"},{name:"todo2"},{name:"todo1"},{name:"todo0"}],
         todoTag:[0,0,0,0]
@@ -18,17 +19,33 @@ var vm = new Vue({
             var title = vm.$data.todoTitle;
             if(title != "" || vm.$data.childTodo != []){
                 var date = new Date();
-                var tempData = {
-                    title: title,
-                    time:value,
-                    lock:false,
-                    timestamp:date.getTime(),
-                    show:true,
-                    childTodo: vm.$data.childTodo
-                };
+                //alert(vm.$data.childTodo !="");
+                if(vm.$data.childTodo != ""){
+                    //有子任务
+                    //alert(title);
+                    var tempData = {
+                        title: vm.$data.childTodo[0],
+                        time:value,
+                        lock:false,
+                        timestamp:date.getTime(),
+                        show:true,
+                        childTodo: vm.$data.childTodo
+                    };
+                }else{
+                    var tempData = {
+                        title: title,
+                        time:value,
+                        lock:false,
+                        timestamp:date.getTime(),
+                        show:true,
+                        childTodo: vm.$data.childTodo
+                    };
+                    //alert(tempData.title);
+                }
                 var temp = vm.$data.todo;
                 temp['todo'+value].push(tempData);
                 vm.$data.todoTitle = "";
+                vm.$data.childTodo = [];
                 todo.changeWord();
                 todo.changeWidth();
                 //console.info(vm.$data.childTodo);
@@ -46,7 +63,9 @@ var vm = new Vue({
                         var childArray = temp[i].childTodo;
                         for(var j=0;j<childArray.length;j++){
                             if(child == childArray[j].title){
-                                childArray.splice(j, 1);
+                                //childArray.splice(j, 1);
+                                childArray[j].show = false;
+
                             }
                         }
                     }else{
@@ -57,7 +76,11 @@ var vm = new Vue({
                             temp[i].timestamp = date.getTime();
                             temp[i].show = false;
                         }else{
-                            temp.splice(i, 1);
+                            var done= temp.splice(i, 1);
+                            var now = new Date(parseInt(done[0].timestamp) * 1000);
+                            var date = now.toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+                            done.timestamp = date;
+                            vm.$data.todo.history.push(done[0]);
                         }
                         break;
                     }
@@ -70,7 +93,7 @@ var vm = new Vue({
             //alert("1");
             var title = vm.$data.todoTitle;
             if(title != ""){
-                vm.$data.childTodo.push({title:title});
+                vm.$data.childTodo.push({title:title,show:true});
                 vm.$data.todoTitle = "";
             }else{
                 alert("少侠你还没有输入任务内容呢。")
@@ -97,6 +120,7 @@ var vm = new Vue({
             var temp = vm.$data.todo["todo"+time];
             for (var i = 0; i < temp.length; i++) {
                 if (title === temp[i].title) {
+
                     temp[i].lock = !temp[i].lock;
                     break;
                 }
@@ -105,10 +129,14 @@ var vm = new Vue({
                 todo.changeWidth();
             },50);
         },
+        //删除所有任务并初始化
         deleteAll: function(){
             if(confirm("确定要移除所有的任务吗？"))
             {
-                todo.resetData();
+                vm.$data.todo['todo0'] = [];
+                vm.$data.todo['todo1'] = [];
+                vm.$data.todo['todo2'] = [];
+                vm.$data.todo['todo3'] = [];
             }
             else
             {
@@ -119,7 +147,6 @@ var vm = new Vue({
 });
 
 var todo = {
-
     saveState: function () {
         var state = vm.$data.todo;
         try {
@@ -158,33 +185,35 @@ var todo = {
         }
     },
     resetData: function(){
+        var date = new Date();
+        var timestamp = date.getTime();
         vm.$data.todo = {
             todo3: [
-                {title: "在输入框中添加任务", time: "3",show:true, lock:false,childTodo:[]},
-                {title: "点击按钮设置紧要度", time: "3",show:true, lock:false,childTodo:[]},
-                {title: "完成后点击「完事」", time: "3",show:true, lock:false,childTodo:[]},
-                {title: "任务会自动排序", time: "3",show:true,childTodo:[]}
+                {title: "在输入框中添加任务", time: "3",show:true, lock:false,timestamp:timestamp,childTodo:[]},
+                {title: "点击按钮设置紧要度", time: "3",show:true, lock:false,timestamp:timestamp,childTodo:[]},
+                {title: "完成后点击「完事」", time: "3",show:true, lock:false,timestamp:timestamp,childTodo:[]},
+                {title: "任务会自动排序", time: "3",show:true,timestamp:timestamp,childTodo:[]}
             ],
             todo2: [
-                {title: "接着尝试「锁定」", time: "2",show:true,lock:false,childTodo:[]},
-                {title: "点击任务标题锁定", time: "2",show:true,lock:false,childTodo:[]},
-                {title: "再次点击会解锁", time: "2",show:true,lock:false ,childTodo:[] },
-                {title: "锁定任务每天刷新", time: "2",show:true,lock:false,childTodo:[]}
+                {title: "接着尝试「锁定」", time: "2",show:true,lock:false,timestamp:timestamp,childTodo:[]},
+                {title: "点击任务标题锁定", time: "2",show:true,lock:false,timestamp:timestamp,childTodo:[]},
+                {title: "再次点击会解锁", time: "2",show:true,lock:false ,timestamp:timestamp,childTodo:[] },
+                {title: "锁定任务每天刷新", time: "2",show:true,lock:false,timestamp:timestamp,childTodo:[]}
             ],
             todo1: [
-                {title: "", time: "1",show:true,lock:false,
+                {title: "", time: "1",show:true,lock:false,timestamp:timestamp,
                     childTodo:[
-                        {title: "开始体验子任务"},
-                        {title: "在输入框中输入"},
-                        {title: "输入回车增加子任务"},
-                        {title: "其余同part1"}
+                        {title: "开始体验子任务",show:true},
+                        {title: "在输入框中输入",show:true},
+                        {title: "输入回车增加子任务",show:true},
+                        {title: "其余同part1",show:true}
                     ]
                 }
             ],
             todo0: [
-                {title: "最后提示", time: "0",show:true,lock:false,childTodo:[]},
-                {title: "「删除所有」危险", time: "0",show:true,lock:false,childTodo:[]},
-                {title: "开始你的「俟现」吧！", time: "0",show:true,lock:false,childTodo:[]}
+                {title: "最后提示", time: "0",show:true,lock:false,timestamp:timestamp,childTodo:[]},
+                {title: "「删除所有」危险", time: "0",show:true,lock:false,timestamp:timestamp,childTodo:[]},
+                {title: "开始你的「俟现」吧！", time: "0",show:true,lock:false,timestamp:timestamp,childTodo:[]}
             ]
         }
     },

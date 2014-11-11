@@ -13,6 +13,7 @@
 <div id="main">
     <header id="header">
         <h2>Deadline·俟现</h2>
+
         <div id="input-important">
             <button class="green" v-on="click : addTodo('0')">!</button>
             <button class="yellow" v-on="click : addTodo('1')">!!</button>
@@ -22,38 +23,48 @@
     </header>
     <div id="input" class="card">
         <input id="input-todo" type="text" v-model="todoTitle" v-on="keyup : addChildTodo | key enter">
+
         <div v-repeat="childTodo" class="childTodo" v-transition>
             <div class="hr"></div>
             <div class="childTodo-title" id="{{title}}" v-on="click : removeChildTodo('{{title}}')">
                 <span v-if="{{$index}} > 0" class="childTodo-rank">{{$index}}. </span>
+
                 <h3 v-if="{{$index}} == 0">{{title}}</h3>
                 <span v-if="{{$index}} > 0" class="childTodo-title">{{title}}</span>
             </div>
         </div>
     </div>
-    <div id="todolist">
+    <div id="todolist" v-show="showPage.todolist">
         <div v-repeat="list:todoList">
-            <div v-repeat="task:todo[list.name]" v-show="task.show" class="todolist-div todolist-{{task.time}}" v-transition>
+            <div v-repeat="task:todo[list.name]" v-show="task.show" class="todolist-div todolist-{{task.time}} todolist-div-{{task.show}}"
+                 v-transition>
                 <div v-if="task.childTodo.length == 0">
-                    <div class="todolist-title" v-if="!task.lock" id="{{task.title}}" v-on="click : toggleTask('{{task.title}}','{{task.time}}')">
-                        <span >{{task.title}}</span>
+                    <div class="todolist-title" v-if="!task.lock" id="{{task.title}}"
+                         v-on="click : toggleTask('{{task.title}}','{{task.time}}')">
+                        <span>{{task.title}}</span>
                     </div>
-                    <div class="todolist-title flaticon-tack" v-if="task.lock" id="{{task.title}}" v-on="click : toggleTask('{{task.title}}','{{task.time}}')">
-                        <span >{{task.title}}</span>
+                    <div class="todolist-title flaticon-tack" v-if="task.lock" id="{{task.title}}"
+                         v-on="click : toggleTask('{{task.title}}','{{task.time}}')">
+                        <span>{{task.title}}</span>
                     </div>
                     <button v-on="click: finishTodo('{{task.title}}','{{task.time}}')" class="list-4">完事</button>
                 </div>
                 <div v-if="task.childTodo.length > 0">
+                    <div  class="todolist-childTitle list-{{task.time}}">
+                                {{task.title}}
+                         <button v-on="click: finishTodo('{{task.title}}','{{task.time}}')"
+                                        class="list-{{task.time}}">完事
+                         </button>
+                    </div>
                     <ul>
                         <li v-repeat="childTask:task.childTodo">
-                            <div v-if="{{$index}} == 0" class="todolist-childTitle list-{{task.time}}">
-                                {{childTask.title}}
-                                <button v-on="click: finishTodo('{{task.title}}','{{task.time}}')" class="list-{{task.time}}">完事</button>
-                            </div>
+
                             <div v-if="{{$index}} != 0 && childTask.show" class="todolist-childtask">
                                 <div class="hr"></div>
                                 <span>{{$index}}. {{childTask.title}}</span>
-                                <button v-on="click: finishTodo('{{task.title}}','{{task.time}}','{{childTask.title}}')" class="todolist-childFinish">完事</button>
+                                <button v-on="click: finishTodo('{{task.title}}','{{task.time}}','{{childTask.title}}')"
+                                        class="todolist-childFinish">完事
+                                </button>
                             </div>
                         </li>
                     </ul>
@@ -61,34 +72,41 @@
             </div>
         </div>
     </div>
-    <div id="history">
-        {{todo.history}}
+    <div id="history" v-show="showPage.history">
         <div v-repeat="task:todo.history" class="todolist-div todolist-{{task.time}} todolist-history" v-transition>
-            <div v-if="task.childTodo.length == 0" >
-                    <div class="todolist-title" v-if="!task.lock" id="{{task.title}}" v-on="click : toggleTask('{{task.title}}','{{task.time}}')" >
-                        <span >{{task.title}}</span>
-                    </div>
-                <span>{{task.timestamp}}</span>
-            </div>
-                <div v-if="task.childTodo.length > 0">
-                    <ul>
-                        <li v-repeat="childTask:task.childTodo">
-                            <div v-if="{{$index}} == 0" class="todolist-childTitle list-{{task.time}}">
-                                {{childTask.title}}
-                            </div>
-                            <div v-if="{{$index}} != 0 " class="todolist-childtask">
-                                <div class="hr"></div>
-                                <span>{{$index}}. {{childTask.title}}</span>
-                            </div>
-                        </li>
-                    </ul>
+            <div v-if="task.childTodo.length == 0">
+                <div class="todolist-title">
+                    <span>{{task.title}}</span>
                 </div>
+                <div class="history-time">
+                    <span>{{task.timestamp}}</span>
+                    <span>{{task.cost}}</span>
+                </div>
+            </div>
+            <div v-if="task.childTodo.length > 0">
+                <ul>
+                    <li v-repeat="childTask:task.childTodo">
+                        <div v-if="{{$index}} == 0" class="todolist-childTitle list-{{task.time}}">
+                            {{childTask.title}}
+                            <div class="history-time">
+                                <span>{{task.timestamp}}</span>
+                                <span>{{task.cost}}</span>
+                            </div>
+                        </div>
+                        <div v-if="{{$index}} != 0 " class="todolist-childtask">
+                            <div class="hr"></div>
+                            <span>{{$index}}. {{childTask.title}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <div id="control">
-        <button>历史</button>
-        <button>统计</button>
-        <button v-on="click: deleteAll()">删除</button>
+        <button class="control-button control-button-{{showPage.todolist}}" v-on="click: tabPage('todolist')">列表</button>
+        <button class="control-button control-button-{{showPage.history}}" v-on="click: tabPage('history')">历史</button>
+        <button class="control-button control-button-{{showPage.statistics}}" v-on="click: tabPage('statistics')">统计</button>
+        <button class="control-button" v-on="click: deleteAll()">删除</button>
     </div>
 
 </div>

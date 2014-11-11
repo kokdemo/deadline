@@ -69,6 +69,10 @@ body{
     background-color: rgba(0,0,0,0.12);
 }
 
+.hideen{
+    display: none;
+}
+
 header{
     display: block;
     background-color: #3498DB;
@@ -232,6 +236,10 @@ header h2{
     /*padding: 0 10px;*/
     opacity: 0;
 }
+
+.todolist-div-false{
+    display: none;
+}
 /*任务*/
 .todolist-div .todolist-title{
     display: inline-block;
@@ -369,4 +377,45 @@ header h2{
     color: #FFF;
     /*line-height: 40px;*/
 
+}
+
+/*history*/
+.history-time{
+    background-color: #BDC3C7;
+    color: #34495E;
+    text-align: center;
+    overflow: hidden;
+    display: inline-block;
+    border: 0;
+    width: 50px;
+    max-height: 50px;
+    font-size: 16px;
+    /*height: 100%;*/
+    float: right;
+    line-height: 25px;
+}
+
+/*control*/
+#control{
+}
+
+.control-button{
+    padding: 0;
+    margin: 0;
+    height: 50px;
+    width: 25%;
+    display: inline-block;
+    font-size: 16px;
+    float: left;
+    box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.26);
+    border-width: 0 0 1px 0;
+    border-color: rgba(255, 255, 255, 0.12);
+    background-color: #16A085;
+    color: #FFF;
+    transition: all 0.3s ease;
+}
+
+.control-button.control-button-true{
+    background-color: #FFF;
+    color: #34495E;
 }

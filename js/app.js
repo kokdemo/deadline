@@ -1,6 +1,11 @@
 var vm = new Vue({
     el: '#main',
     data: {
+        showPage: {
+            todolist: true,
+            history: false,
+            statistics: false
+        },
         todoTitle: "",
         childTodo: [],
         todo:{
@@ -24,7 +29,7 @@ var vm = new Vue({
                     //有子任务
                     //alert(title);
                     var tempData = {
-                        title: vm.$data.childTodo[0],
+                        title: vm.$data.childTodo[0].title,
                         time:value,
                         lock:false,
                         timestamp:date.getTime(),
@@ -58,6 +63,7 @@ var vm = new Vue({
             var temp = vm.$data.todo["todo"+time];
             for (var i = 0; i < temp.length; i++) {
                 if (title === temp[i].title) {
+
                     if(child != null){
                         //如果任务的传入子任务不为空，说明不是一个单一任务。
                         var childArray = temp[i].childTodo;
@@ -65,21 +71,39 @@ var vm = new Vue({
                             if(child == childArray[j].title){
                                 //childArray.splice(j, 1);
                                 childArray[j].show = false;
-
+                                alert(childArray[j]);
                             }
                         }
                     }else{
                         //如果任务的传入子任务其他情况，说明是一个单一任务或者全任务被完成。
+                        //alert(child);
+                        var date = new Date();
                         if(temp[i].lock == true){
                             //如果任务被锁定，点击完成，任务只会被隐藏而不会消失,同时时间戳更新。
-                            var date = new Date();
                             temp[i].timestamp = date.getTime();
                             temp[i].show = false;
                         }else{
                             var done= temp.splice(i, 1);
-                            var now = new Date(parseInt(done[0].timestamp) * 1000);
-                            var date = now.toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
-                            done.timestamp = date;
+                            var addtime = new Date(parseInt(done[0].timestamp));
+                            //var date = now.toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+                            var cost = (date.getTime() - done[0].timestamp)/1000;
+                            var costTime = "";
+                            if(cost >= 3600*24){
+                                //如果花费时间大于一天
+                                costTime = Math.floor(cost/(3600*24)) + 'd';
+                            }else if(cost >= 3600){
+                                //如果花费时间大于一小时
+                                costTime = Math.floor(cost/3600) + 'h';
+                            }else if(cost >= 60){
+                                //如果花费时间小于一小时
+                                costTime = Math.floor(cost/60) + 'm';
+                            }else{
+                                //花费小于一分钟
+                                costTime = '一瞬';
+                            }
+                            //alert(costTime);
+                            done[0].cost = costTime;
+                            done[0].timestamp = addtime.getMonth()+'/'+addtime.getDate();
                             vm.$data.todo.history.push(done[0]);
                         }
                         break;
@@ -133,14 +157,27 @@ var vm = new Vue({
         deleteAll: function(){
             if(confirm("确定要移除所有的任务吗？"))
             {
-                vm.$data.todo['todo0'] = [];
-                vm.$data.todo['todo1'] = [];
-                vm.$data.todo['todo2'] = [];
-                vm.$data.todo['todo3'] = [];
+                vm.$data.todo ={};
+//                vm.$data.todo['todo0'] = [];
+//                vm.$data.todo['todo1'] = [];
+//                vm.$data.todo['todo2'] = [];
+//                vm.$data.todo['todo3'] = [];
             }
             else
             {
                 alert("你大概是手滑了……");
+            }
+        },
+        //切换页面
+        tabPage: function(name){
+            var temp = vm.$data.showPage;
+            for(var i in temp){
+                if( i == name ){
+                    temp[i] = true;
+                }else{
+                    temp[i] = false;
+                }
+                //alert(temp);
             }
         }
     }

@@ -18,7 +18,7 @@
             <button class="green" v-on="click : addTodo('0')">!</button>
             <button class="yellow" v-on="click : addTodo('1')">!!</button>
             <button class="orange" v-on="click : addTodo('2')">!!!</button>
-            <button class="red" v-on="click : addTodo('3')">!!!!</button>
+            <button class="red"   v-on="click : addTodo('3')">!!!!</button>
         </div>
     </header>
     <div id="input" class="card">
@@ -102,10 +102,30 @@
             </div>
         </div>
     </div>
+    <div id="statistics" v-if="showPage.statistics">
+        <div class="statistics-now">
+            <h3>你当前有{{todo.statistics.now[0]+todo.statistics.now[1]+todo.statistics.now[2]+todo.statistics.now[3]}}个俟现</h3>
+            <div class="statistics-spans">
+                <span class="statistics-span green"  v-model="todo.statistics.now[0]"></span>
+                <span class="statistics-span yellow" v-model="todo.statistics.now[1]"></span>
+                <span class="statistics-span orange" v-model="todo.statistics.now[2]"></span>
+                <span class="statistics-span red"    v-model="todo.statistics.now[3]"></span>
+            </div>
+        </div>
+        <div class="statistics-history">
+            <h3>你已经完成了{{todo.statistics.history[0]+todo.statistics.history[1]+todo.statistics.history[2]+todo.statistics.history[3]}}个俟现</h3>
+            <div class="statistics-spans">
+                <span class="statistics-span green"  v-model="todo.statistics.history[0]"></span>
+                <span class="statistics-span yellow" v-model="todo.statistics.history[1]"></span>
+                <span class="statistics-span orange" v-model="todo.statistics.history[2]"></span>
+                <span class="statistics-span red"    v-model="todo.statistics.history[3]"></span>
+            </div>
+        </div>
+    </div>
     <div id="control">
         <button class="control-button control-button-{{showPage.todolist}}" v-on="click: tabPage('todolist')">列表</button>
         <button class="control-button control-button-{{showPage.history}}" v-on="click: tabPage('history')">历史</button>
-        <button class="control-button control-button-{{showPage.statistics}}" v-on="click: tabPage('statistics')">统计</button>
+        <button class="control-button control-button-{{showPage.statistics}}" v-on="click: tabPage('statistics');statistics();">统计</button>
         <button class="control-button" v-on="click: deleteAll()">删除</button>
     </div>
 

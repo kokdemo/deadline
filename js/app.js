@@ -13,10 +13,10 @@ var vm = new Vue({
             todo1: [],
             todo2: [],
             todo3: [],
-            history: []
+            history: [],
+            statistics: {now:[],history:[]}
         },
-        todoList:[{name:"todo3"},{name:"todo2"},{name:"todo1"},{name:"todo0"}],
-        todoTag:[0,0,0,0]
+        todoList:[{name:"todo3"},{name:"todo2"},{name:"todo1"},{name:"todo0"}]
     },
     methods: {
         //增加todo 区分单一任务和子任务
@@ -49,11 +49,13 @@ var vm = new Vue({
                 }
                 var temp = vm.$data.todo;
                 temp['todo'+value].push(tempData);
+                //获取长度
+                this.statistics();
                 vm.$data.todoTitle = "";
                 vm.$data.childTodo = [];
                 todo.changeWord();
                 todo.changeWidth();
-                //console.info(vm.$data.childTodo);
+
             }else{
                 alert("少侠你还没有输入任务内容呢。")
             }
@@ -63,7 +65,6 @@ var vm = new Vue({
             var temp = vm.$data.todo["todo"+time];
             for (var i = 0; i < temp.length; i++) {
                 if (title === temp[i].title) {
-
                     if(child != null){
                         //如果任务的传入子任务不为空，说明不是一个单一任务。
                         var childArray = temp[i].childTodo;
@@ -71,21 +72,18 @@ var vm = new Vue({
                             if(child == childArray[j].title){
                                 //childArray.splice(j, 1);
                                 childArray[j].show = false;
-                                alert(childArray[j]);
                             }
                         }
                     }else{
                         //如果任务的传入子任务其他情况，说明是一个单一任务或者全任务被完成。
-                        //alert(child);
                         var date = new Date();
                         if(temp[i].lock == true){
                             //如果任务被锁定，点击完成，任务只会被隐藏而不会消失,同时时间戳更新。
                             temp[i].timestamp = date.getTime();
                             temp[i].show = false;
                         }else{
-                            var done= temp.splice(i, 1);
+                            var done = temp.splice(i, 1);
                             var addtime = new Date(parseInt(done[0].timestamp));
-                            //var date = now.toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
                             var cost = (date.getTime() - done[0].timestamp)/1000;
                             var costTime = "";
                             if(cost >= 3600*24){
@@ -105,6 +103,8 @@ var vm = new Vue({
                             done[0].cost = costTime;
                             done[0].timestamp = addtime.getMonth()+'/'+addtime.getDate();
                             vm.$data.todo.history.push(done[0]);
+                            vm.$data.todo.statistics.now[time]--;
+                            vm.$data.todo.statistics.history[time]++;
                         }
                         break;
                     }
@@ -157,11 +157,14 @@ var vm = new Vue({
         deleteAll: function(){
             if(confirm("确定要移除所有的任务吗？"))
             {
-                vm.$data.todo ={};
-//                vm.$data.todo['todo0'] = [];
-//                vm.$data.todo['todo1'] = [];
-//                vm.$data.todo['todo2'] = [];
-//                vm.$data.todo['todo3'] = [];
+                vm.$data.todo ={
+                    todo0: [],
+                    todo1: [],
+                    todo2: [],
+                    todo3: [],
+                    history: [],
+                    statistics: {now:[0,0,0,0],history:[0,0,0,0]}
+                };
             }
             else
             {
@@ -178,6 +181,15 @@ var vm = new Vue({
                     temp[i] = false;
                 }
                 //alert(temp);
+            }
+        },
+        statistics: function(time){
+            var temp = vm.$data.todo;
+            for(var i= 0;i<4;i++){
+                temp.statistics.now[i] = temp['todo'+i].length;
+            }
+            if(time != null){
+                temp.statistics.history[i]++;
             }
         }
     }
@@ -238,7 +250,7 @@ var todo = {
                 {title: "锁定任务每天刷新", time: "2",show:true,lock:false,timestamp:timestamp,childTodo:[]}
             ],
             todo1: [
-                {title: "", time: "1",show:true,lock:false,timestamp:timestamp,
+                {title: "开始体验子任务", time: "1",show:true,lock:false,timestamp:timestamp,
                     childTodo:[
                         {title: "开始体验子任务",show:true},
                         {title: "在输入框中输入",show:true},
@@ -251,7 +263,8 @@ var todo = {
                 {title: "最后提示", time: "0",show:true,lock:false,timestamp:timestamp,childTodo:[]},
                 {title: "「删除所有」危险", time: "0",show:true,lock:false,timestamp:timestamp,childTodo:[]},
                 {title: "开始你的「俟现」吧！", time: "0",show:true,lock:false,timestamp:timestamp,childTodo:[]}
-            ]
+            ],
+            statistics: {now:[0,0,0,0],history:[0,0,0,0]}
         }
     },
     changeWord: function (){

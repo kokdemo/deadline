@@ -395,6 +395,58 @@ header h2{
     line-height: 25px;
 }
 
+/*statistics*/
+.statistics-now{
+    margin: 10px 0 ;
+    background-color: #FFF;
+    box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.26);
+    border-width: 0 0 1px 0;
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+#statistics .statistics-now h3{
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    background-color: #1ABC9C;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.statistics-spans{
+    padding: 5px;
+    width: 100%;
+}
+.statistics-span{
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+    margin: 1%;
+    width: 21.5%;
+    font-size: 20px;
+    box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.26);
+    border-width: 0 0 1px 0;
+    border-color: rgba(255, 255, 255, 0.12);
+}
+.statistics-history{
+    margin: 10px 0 ;
+    background-color: #FFF;
+    box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.26);
+    border-width: 0 0 1px 0;
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+#statistics .statistics-history h3{
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    background-color: #F39C12;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 18px;
+}
+
 /*control*/
 #control{
 }

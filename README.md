@@ -1,6 +1,7 @@
 deadline·俟现  
 ========
 
+###使用
 http://kokdemo.github.io/todo
 
 ###理念
@@ -21,7 +22,13 @@ http://kokdemo.github.io/todo
 3. 增加一个分享任务的功能
 4. 任务回顾与统计 完成
 5. 子任务 完成
+6. 重新优化存储的数据结构，改用indexedDB代替现有的localstorage
+7. 改写界面，体现理念
+8. 写一个站点出来
 
+###其他版本
+https://github.com/kokdemo/deadline-nw
+这是一个用node-webkit进行打包的版本，我目前只打了一个mac的包，有兴趣你可以下载自行打包。
 
 ###愿景
 
